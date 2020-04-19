@@ -1,0 +1,37 @@
+<div class="container" [ngClass]="{active: isActive()}" (contextmenu)="displayOptions()">
+  <div class="options" [ngClass]="{opened: optionsDisplayed}">
+    <a href="#" class="delete" (click)="deleteProject()" title="{{ 'PAGES.HOME.LIST-ITEM.REMOVE' | translate }}"><fa-icon [icon]="faTrash"></fa-icon></a>
+  </div>
+
+
+  <div class="project-meta">
+    <div class="projectName" (dblclick)="editName()">
+      <ng-container *ngIf="editingName">
+        <input type="text" [(ngModel)]="project.name" placeholder="{{'PAGES.HOME.PROJECT' | translate}}" (focusout)="stopEditName()" (keypress)="keypressEditName($event)">
+      </ng-container>
+      <ng-container *ngIf="!editingName">
+        {{ this.project.name }}
+      </ng-container>
+    </div>
+    <div class="clientName" (dblclick)="editClientName()">
+      <ng-container *ngIf="editingClientName">
+        <input type="text" [(ngModel)]="project.clientName" placeholder="{{'PAGES.HOME.CUSTOMER' | translate}}" (focusout)="stopEditClientName()" (keypress)="keypressEditClientName($event)">
+      </ng-container>
+      <ng-container *ngIf="!editingClientName">
+        {{ this.project.clientName }}
+      </ng-container>
+
+    </div>
+  </div>
+
+
+  <div class="counter">
+    <span class="count">{{ getTimeSpentToday() | beautifulSeconds }}</span>
+  </div>
+
+
+  <div class="controls">
+    <a href="#" (click)="startCounting()" *ngIf="!isActive()" title="{{ 'PAGES.HOME.LIST-ITEM.START' | translate }}"><fa-icon [icon]="faPlay"></fa-icon></a>
+    <a href="#" (click)="stopCounting()" *ngIf="isActive()" title="{{ 'PAGES.HOME.LIST-ITEM.STOP' | translate }}"><fa-icon [icon]="faStop"></fa-icon></a>
+  </div>
+</div>

@@ -1,0 +1,99 @@
+@import "src/colors";
+
+.container{
+  display: flex;
+  align-items: stretch;
+
+  border-bottom: 1px solid $blue;
+
+  background-color: #fff;
+  &.active{
+    color: #fff;
+    background-color: $blue;
+    .controls{
+      background-color: $headerBackgroundColor;
+      &:hover{
+        a{
+          border-radius: 0;
+          background-color: lighten($headerBackgroundColor,10%);
+          color: #fff;
+        }
+      }
+      a {
+        color: #fff;
+      }
+    }
+  }
+  .options{
+    width: 0;
+    overflow: hidden;
+    transition: 0.15s;
+    &.opened{
+      width: 50px;
+    }
+    a.delete{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      height: 100%;
+      width: 100%;
+
+      background-color: #bb0909;
+      color: #fff;
+      text-decoration: none;
+      text-align: center;
+
+      font-weight: bold;
+      font-size: 16px;
+      transition: 0.3s;
+      &:hover{
+        font-size: 18px;
+      }
+    }
+
+  }
+  .project-meta{
+    flex-grow: 1;
+    padding: 5px;
+    .projectName{
+      font-weight: bold;
+    }
+    .clientName{
+      font-size: 13px;
+    }
+  }
+  .counter{
+    display: flex;
+    align-items: center;
+
+    padding:0 10px;
+    .count{
+      font-weight: bold;
+      font-size: 15px;
+    }
+  }
+  .controls{
+    width: 50px;
+    &:hover{
+      a{
+        color: $headerBackgroundColor;
+        border-radius: 50%;
+        background-color: #f1f1f1;
+      }
+    }
+    a{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      height: 100%;
+      width: 100%;
+
+      text-decoration: none;
+      color: #ccc;
+      transition: 0.18s;
+      font-size: 14px;
+    }
+  }
+}

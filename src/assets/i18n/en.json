@@ -1,7 +1,15 @@
 {
   "PAGES": {
       "HOME": {
-          "TITLE": "App works !"
+          "TITLE": "Timy",
+          "PROJECT": "Project",
+          "CUSTOMER": "Customer",
+          "TODAY_TIMER": "Total time today",
+          "LIST-ITEM": {
+              "REMOVE": "Remove",
+              "START": "Start",
+              "STOP": "Stop"
+          }
       }
   }
 }

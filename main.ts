@@ -1,4 +1,4 @@
-import { app, BrowserWindow, screen } from 'electron';
+import {app, BrowserWindow, protocol, screen} from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
@@ -8,10 +8,8 @@ const args = process.argv.slice(1),
 
 function createWindow(): BrowserWindow {
 
-  const electronScreen = screen;
-
   // Create the browser window.
-  const mostOnTheRightScreen = electronScreen.getAllDisplays().reduce((previousDisplay, currentDisplay) => {
+  const mostOnTheRightScreen = screen.getAllDisplays().reduce((previousDisplay, currentDisplay) => {
     return previousDisplay.workArea.x > currentDisplay.workArea.x ? previousDisplay : currentDisplay;
   });
   let workArea = mostOnTheRightScreen.workArea;
@@ -20,12 +18,12 @@ function createWindow(): BrowserWindow {
   win = new BrowserWindow({
     x: workArea.x + workArea.width - windowWidth,
     y: 0,
-    frame: true,
     width: windowWidth,
     height: workArea.height,
+    title: "Timy",
     webPreferences: {
       nodeIntegration: true,
-      allowRunningInsecureContent: (serve) ? true : false,
+      allowRunningInsecureContent: (serve),
     },
   });
 
@@ -44,6 +42,8 @@ function createWindow(): BrowserWindow {
 
   if (serve) {
     // win.webContents.openDevTools();
+  }else{
+    win.removeMenu();
   }
 
   // Emitted when the window is closed.
@@ -58,6 +58,11 @@ function createWindow(): BrowserWindow {
 }
 
 try {
+  if(!serve){
+    protocol.registerSchemesAsPrivileged([
+      { scheme: 'file:', privileges: { standard: true, secure: true } }
+    ])
+  }
 
   app.allowRendererProcessReuse = true;
 

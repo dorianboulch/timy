@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="project-meta">
+    <div class="projectName"><input type="text" [(ngModel)]="project.name" placeholder="{{'PAGES.HOME.PROJECT' | translate}}" (keypress)="keypressField($event)"></div>
+    <div class="clientName"><input type="text" [(ngModel)]="project.clientName" placeholder="{{'PAGES.HOME.CUSTOMER' | translate}}"></div>
+  </div>
+  <div class="controls">
+    <a href="#" (click)="createProject()"><fa-icon [icon]="faPlus"></fa-icon></a>
+  </div>
+</div>

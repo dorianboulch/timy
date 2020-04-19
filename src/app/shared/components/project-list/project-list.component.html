@@ -1,1 +1,4 @@
-<p>project-list works!</p>
+<div id="projectList">
+  <app-project-item *ngFor="let project of projects" [project]="project"></app-project-item>
+  <app-project-new-item></app-project-new-item>
+</div>

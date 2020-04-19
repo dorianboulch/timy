@@ -1,7 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+@import "colors";
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('assets/fonts/Manrope-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: 'PTMono';
+  src: url('assets/fonts/PTMono-Regular.ttf');
+}
+
+*{
+  box-sizing: border-box;
+}
+
 html, body {
   margin: 0;
   padding: 0;
 
   height: 100%;
+
+  font-family: Manrope, serif;
+  background-color: $backgroundColor;
+}
+
+.count {
+  font-family: PTMono, serif;
 }

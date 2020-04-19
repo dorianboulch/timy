@@ -1,0 +1,31 @@
+@import "src/colors";
+
+#header{
+  padding: 10px;
+  background-color: $headerBackgroundColor;
+  display: flex;
+  align-items: stretch;
+
+  & > div{
+    &.title{
+      flex-grow: 1;
+      h1{
+        margin: 0;
+        color: #fff;
+      }
+    }
+    &.timer{
+      display: flex;
+      align-items: center;
+
+      color: $headerBackgroundColor;
+      .count{
+        background-color: #fff;
+        border-radius: 22px;
+        padding:5px;
+        font-weight: bold;
+      }
+
+    }
+  }
+}

@@ -1,0 +1,33 @@
+@import "../project-item/project-item.component";
+@import "src/colors";
+
+.container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  border-top: 4px solid $blue;
+  border-bottom: 0;
+  .project-meta{
+    padding: 5px 0 5px 5px;
+    &>div{
+      input[type='text'] {
+        border: 1px solid #cccccc;
+        box-shadow: none;
+        padding: 5px;
+        width: 100%;
+      }
+    }
+  }
+  .controls {
+    width: 64px;
+    a {
+      color: $headerBackgroundColor
+    }
+    &:hover{
+      a{
+        color: #fff;
+        background-color: $blue;
+      }
+    }
+  }
+}
