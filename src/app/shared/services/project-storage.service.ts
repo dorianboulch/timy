@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Project} from "../entities/Project";
 import {History} from "../entities/History";
+import {differenceInSeconds, isToday} from "date-fns";
 
 @Injectable({
   providedIn: 'root'
@@ -120,7 +121,11 @@ export class ProjectStorageService {
       project.history = []
       if(rawProject.history){
         for(const h of rawProject.history){
-          project.history.push(new History(new Date(h.from), new Date(h.to)));
+          const history = new History(new Date(h.from), new Date(h.to));
+          project.history.push(history);
+          if(isToday(history.from)){
+            project.timeSpentToday += differenceInSeconds(history.to, history.from);
+          }
         }
       }
       this.projects.push(project)

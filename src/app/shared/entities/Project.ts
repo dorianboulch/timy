@@ -5,6 +5,7 @@ export class Project {
   public clientName: string;
   public createdAt: Date;
   public history: History[] = [];
+  public timeSpentToday = 0;
 
   constructor(name?: string, clientName?: string, createdAt?: Date) {
     this.name = name;

@@ -21,23 +21,26 @@ module.exports = function (config) {
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    autoWatch: true,
+    autoWatch: false,
     browsers: ['AngularElectron'],
     singleRun: true,
     customLaunchers: {
       AngularElectron: {
         base: 'Electron',
+        flags: [
+          '--remote-debugging-port=9222'
+        ],
         browserWindowOptions: {
           webPreferences: {
             nodeIntegration: true,
-            allowRunningInsecureContent: true
+            nodeIntegrationInSubFrames: true,
+            allowRunningInsecureContent: true,
           }
         }
       }
     },
     client: {
-      clearContext: false, // leave Jasmine Spec Runner output visible in browser
-      // useIframe: false
+      clearContext: false,
     }
   });
 };

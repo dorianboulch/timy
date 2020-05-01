@@ -1,0 +1,31 @@
+<ng-template #customCellTemplate let-day="day" let-locale="locale">
+  <div class="cal-cell-top">
+    <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+    <table *ngIf="day.events.length > 0" class="events">
+        <tr *ngFor="let event of day.events">
+          <td>
+            <span class="projectName">{{ event.project.name }}</span><br />
+            <span class="clientName">{{ event.project.clientName }}</span>
+          </td>
+          <td><span class="duration">{{ event.totalDuration}}</span></td>
+        </tr>
+    </table>
+
+  </div>
+</ng-template>
+
+<div id="calendar">
+  <div class="nav">
+    <span class="month-year">{{ viewDate | calendarDate: view + 'ViewTitle' }}</span>
+    <button mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="viewDateChange.next(viewDate)">Previous</button>
+    <button mwlCalendarToday                      [(viewDate)]="viewDate" (viewDateChange)="viewDateChange.next(viewDate)">Today</button>
+    <button mwlCalendarNextView     [view]="view" [(viewDate)]="viewDate" (viewDateChange)="viewDateChange.next(viewDate)">Next</button>
+  </div>
+
+  <mwl-calendar-month-view
+    [viewDate]="viewDate"
+    [events]="events"
+    [cellTemplate]="customCellTemplate"
+    weekStartsOn="1"
+  ></mwl-calendar-month-view>
+</div>

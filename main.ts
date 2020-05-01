@@ -20,7 +20,11 @@ function createWindow(): BrowserWindow {
     y: 0,
     width: windowWidth,
     height: workArea.height,
+    minWidth: 300,
+    useContentSize: true,
+    hasShadow: false,
     title: "Timy",
+    show: false,
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: (serve),
@@ -53,6 +57,10 @@ function createWindow(): BrowserWindow {
     // when you should delete the corresponding element.
     win = null;
   });
+
+  win.once('ready-to-show', () => {
+    win.show()
+  })
 
   return win;
 }

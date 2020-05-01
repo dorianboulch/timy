@@ -39,19 +39,6 @@ export class ProjectItemComponent implements OnInit {
     this.projectTimeManagerService.stopTimeCounting();
   }
 
-  getTimeSpentToday(): number {
-    if(this.project.history == null || this.project.history.length < 1){
-      return 0
-    }
-
-    const now = new Date();
-    return this.project.history.filter(history => {
-        return now.getFullYear() === history.from.getFullYear() && now.getMonth() === history.from.getMonth() && now.getDate() === history.from.getDate()
-    }).reduce((total,history) => {
-      return total + Math.round((history.to.getTime() - history.from.getTime()) / 1000)
-    }, 0);
-  }
-
   displayOptions(): void {
     if(!this.isActive()){
       this.optionsDisplayed = !this.optionsDisplayed

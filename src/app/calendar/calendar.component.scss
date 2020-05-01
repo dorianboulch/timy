@@ -1,0 +1,49 @@
+@import "src/colors";
+
+#calendar{
+  .nav{
+    background-color: $headerBackgroundColor;
+    text-align: right;
+    padding: 15px;
+    height: 64px;
+    .month-year{
+      font-weight: bold;
+      font-size: 1.2em;
+      color: #fff;
+    }
+    button:first-of-type{
+      margin-left: 10px;
+    }
+  }
+  .cal-today{
+    .events{
+      width: calc(100% - 40px);
+    }
+  }
+  .events{
+    border-collapse: collapse;
+    width: calc(100% - 50px);
+    td{
+      padding: 2px 7px;
+      border-bottom: 1px solid #ccc;
+      &:nth-of-type(2){
+        border-left: 1px solid #ccc;
+        width:1px;
+        white-space:nowrap;
+        text-align: right;
+      }
+    }
+    .projectName{
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+    .clientName{
+      font-size: 0.7em;
+    }
+    .duration{
+      font-weight: bold;
+      font-size: 0.9em;
+      font-family: PTMono, serif;
+    }
+  }
+}

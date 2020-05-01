@@ -6,7 +6,7 @@
   display: flex;
   align-items: stretch;
 
-  & > div{
+  & > div {
     &.title{
       flex-grow: 1;
       h1{
@@ -19,6 +19,9 @@
       align-items: center;
 
       color: $headerBackgroundColor;
+      &:hover{
+        cursor: pointer;
+      }
       .count{
         background-color: #fff;
         border-radius: 22px;
@@ -26,6 +29,19 @@
         font-weight: bold;
       }
 
+    }
+  }
+  & > nav{
+    display: flex;
+    align-items: center;
+
+    margin-right: 5px;
+
+    a{
+      color: #fff;
+      text-decoration: none;
+
+      margin: 0 5px;
     }
   }
 }

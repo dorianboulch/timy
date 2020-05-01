@@ -9,6 +9,11 @@
               "REMOVE": "Remove",
               "START": "Start",
               "STOP": "Stop"
+          },
+          "GOAL": {
+            "DAILY_GOAL": "Daily Goal",
+            "WEEKLY_GOAL": "Weekly Goal",
+            "NOT_ENABLED": "Not enabled"
           }
       }
   }

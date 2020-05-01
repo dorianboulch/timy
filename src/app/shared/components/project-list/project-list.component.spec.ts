@@ -1,7 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ProjectListComponent } from './project-list.component';
-import {SharedModule} from "../../shared.module";
+import {ProjectListComponent} from './project-list.component';
 import {ProjectNewItemComponent} from "../project-new-item/project-new-item.component";
 import {FormsModule} from "@angular/forms";
 import {TranslateModule} from "@ngx-translate/core";

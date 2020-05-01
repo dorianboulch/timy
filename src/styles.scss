@@ -1,3 +1,4 @@
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
 @import "colors";
 
 @font-face {
@@ -26,4 +27,44 @@ html, body {
 
 .count {
   font-family: PTMono, serif;
+}
+
+a {
+  color: $blue;
+}
+
+button {
+  background-color: $blue;
+  color: #fff;
+
+  border: 1px solid lighten($blue, 3%);
+  padding: 6px 12px;
+  font-size: 1em;
+
+  transition: 0.1s;
+
+  &:hover {
+    cursor: pointer;
+
+    background-color: #fff;
+    color: $blue;
+    border-color: $blue;
+    border-radius: 3px;
+  }
+
+  &.small {
+    padding: 2px 4px;
+    font-size: 0.8em;
+  }
+
+  &.red {
+    background-color: $red;
+    border: 1px solid lighten($red, 3%);
+
+    &:hover {
+      background-color: #fff;
+      color: $red;
+      border-color: $red;
+    }
+  }
 }

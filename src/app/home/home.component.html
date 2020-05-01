@@ -2,9 +2,15 @@
   <div class="title">
     <h1>{{ 'PAGES.HOME.TITLE' | translate }}</h1>
   </div>
-  <div class="timer">
-    <span title="{{ 'PAGES.HOME.TODAY_TIMER' | translate }}" class="count">{{ projectTimeManagerService.totalTimeToday | beautifulSeconds }}</span>
+  <nav>
+    <a href="#" (click)="openCalendar()"><fa-icon [icon]="faCalendarAlt"></fa-icon></a>
+    <a routerLink=""><fa-icon [icon]="faCog"></fa-icon></a>
+  </nav>
+  <div class="timer" (click)="toggleDisplayGoals()">
+    <span title="{{ 'PAGES.HOME.TODAY_TIMER' | translate }}" class="count">{{ totalTimeTodayCounter | beautifulSeconds }}</span>
   </div>
 </div>
+
+<goals *ngIf="displayGoals"></goals>
 
 <app-project-list></app-project-list>

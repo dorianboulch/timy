@@ -11,13 +11,16 @@ import {ProjectStorageService} from "./services/project-storage.service";
 import { ProjectNewItemComponent } from './components/project-new-item/project-new-item.component';
 import { BeautifulSecondsPipe } from './pipes/beautiful-seconds.pipe';
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {GoalsService} from "./services/goals.service";
+import { GoalsComponent } from './components/goals/goals.component';
 
 @NgModule({
-  declarations: [PageNotFoundComponent, WebviewDirective, ProjectListComponent, ProjectItemComponent, ProjectNewItemComponent, BeautifulSecondsPipe],
+  declarations: [PageNotFoundComponent, WebviewDirective, ProjectListComponent, ProjectItemComponent, ProjectNewItemComponent, BeautifulSecondsPipe, GoalsComponent],
   imports: [CommonModule, TranslateModule, FormsModule, FontAwesomeModule],
-  exports: [TranslateModule, WebviewDirective, FormsModule, ProjectListComponent, BeautifulSecondsPipe],
+  exports: [TranslateModule, WebviewDirective, FormsModule, ProjectListComponent, BeautifulSecondsPipe, GoalsComponent],
   providers: [
-    ProjectStorageService
+    ProjectStorageService,
+    GoalsService
   ]
 })
 export class SharedModule {}

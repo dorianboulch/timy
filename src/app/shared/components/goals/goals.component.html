@@ -1,0 +1,48 @@
+<div id="goals">
+
+  <div class="goal">
+    <div class="head">
+      <span class="title">{{ 'PAGES.HOME.GOAL.DAILY_GOAL' | translate }}</span>
+      <span class="value">
+        <ng-container *ngIf="!editingDailyGoal">
+          <ng-container *ngIf="dailyGoalIsEnabled()">
+            <span class="duration">{{ projectTimeManagerService.totalTimeToday | async | beautifulSeconds }}</span> / <a href="#" class="duration" (click)="editDailyGoal($event)">{{ daySecondsGoal | beautifulSeconds }}</a>
+          </ng-container>
+          <a href="#" (click)="editDailyGoal($event)" *ngIf="!dailyGoalIsEnabled()">{{ 'PAGES.HOME.GOAL.NOT_ENABLED' | translate }}</a>
+        </ng-container>
+      </span>
+    </div>
+    <div *ngIf="editingDailyGoal" class="edit">
+      <input type="time" [(ngModel)]="dailyGoalInputValue">
+      <button class="small" (click)="saveNewDailyGoal()"><fa-icon [icon]="faCheck"></fa-icon></button>
+      <button class="small red" (click)="editDailyGoal($event)"><fa-icon [icon]="faTimes"></fa-icon></button>
+    </div>
+
+    <progress *ngIf="dailyGoalIsEnabled() && !editingDailyGoal" value="{{dayProgress}}" max="1" title="{{ dayProgress*100+'%' }}"></progress>
+
+  </div>
+
+
+
+  <div class="goal">
+    <div class="head">
+      <span class="title">{{ 'PAGES.HOME.GOAL.WEEKLY_GOAL' | translate }}</span>
+      <span class="value">
+        <ng-container *ngIf="!editingWeeklyGoal">
+          <ng-container *ngIf="weeklyGoalIsEnabled()">
+            <span class="duration">{{ projectTimeManagerService.totalTimeThisWeek | async | beautifulSeconds }}</span> / <a href="#" class="duration" (click)="editWeeklyGoal($event)">{{ weekSecondsGoal | beautifulSeconds }}</a>
+          </ng-container>
+          <a href="#" (click)="editWeeklyGoal($event)" *ngIf="!weeklyGoalIsEnabled()">{{ 'PAGES.HOME.GOAL.NOT_ENABLED' | translate }}</a>
+        </ng-container>
+      </span>
+    </div>
+    <div *ngIf="editingWeeklyGoal" class="edit">
+      <input type="time" [(ngModel)]="weeklyGoalInputValue">
+      <button class="small" (click)="saveNewWeeklyGoal()"><fa-icon [icon]="faCheck"></fa-icon></button>
+      <button class="small red" (click)="editWeeklyGoal($event)"><fa-icon [icon]="faTimes"></fa-icon></button>
+    </div>
+
+    <progress *ngIf="weeklyGoalIsEnabled() && !editingWeeklyGoal" value="{{weekProgress}}" max="1" title="{{ weekProgress*100+'%' }}"></progress>
+  </div>
+
+</div>

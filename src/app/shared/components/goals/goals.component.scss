@@ -1,0 +1,47 @@
+@import "src/colors";
+
+#goals{
+  background-color: #fff;
+  border-bottom: 3px solid $blue;
+  display: flex;
+  justify-content: space-between;
+  .goal{
+    flex-grow: 1;
+    padding: 5px;
+  }
+  .head{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    .title{
+      font-weight: bold;
+    }
+    .duration{
+      font-weight: bold;
+      font-size: 0.9em;
+      font-family: PTMono, serif;
+    }
+  }
+  .edit{
+    display: flex;
+    input{
+      font-size: 1em;
+    }
+    button{
+      width: 30px;
+      height: 30px;
+    }
+  }
+  progress {
+    appearance: none;
+    width: 100%;
+    height: 20px;
+    &::-webkit-progress-bar {
+      background-color: #ccc;
+    }
+    &::-webkit-progress-value {
+      background-color: $blue;
+      transition: 0.2s;
+    }
+  }
+}
