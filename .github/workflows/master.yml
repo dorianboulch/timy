@@ -4,6 +4,7 @@ name: Build artefacts
 on:
   push:
     branches: [ master ]
+    tags: [ v1.* ]
 
 jobs:
   build:
