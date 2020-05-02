@@ -106,7 +106,7 @@ describe('ProjectStorageService', () => {
     const project = new Project('incredible', 'Facebook');
     project.history.push(new History(
       new Date(2020, 3, 17, 17),
-      new Date(2020, 3,17, 17,30)
+      new Date(2020, 3, 17, 17,30)
     ))
     service.saveProject(project);
 
@@ -116,8 +116,8 @@ describe('ProjectStorageService', () => {
       clientName: "Facebook",
       history:[
         {
-          from:"2020-04-17T15:00:00.000Z",
-          to:"2020-04-17T15:30:00.000Z"
+          from: new Date(2020, 3,17, 17).toISOString(),
+          to: new Date(2020, 3, 17, 17, 30).toISOString()
         }
       ]}))
   })
