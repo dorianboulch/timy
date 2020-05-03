@@ -32,6 +32,7 @@ function createWindow(): BrowserWindow {
   });
 
   if (serve) {
+    require('devtron').install();
     require('electron-reload')(__dirname, {
       electron: require(`${__dirname}/node_modules/electron`)
     });
