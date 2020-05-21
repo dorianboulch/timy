@@ -1,5 +1,16 @@
 @import "src/colors";
-
+#home{
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+  app-project-list{
+    display: block;
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: auto;
+  }
+}
 #header{
   padding: 10px;
   background-color: $headerBackgroundColor;

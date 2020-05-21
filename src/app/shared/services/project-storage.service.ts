@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Project} from "../entities/Project";
 import {History} from "../entities/History";
-import {differenceInSeconds, isToday} from "date-fns";
+import {differenceInSeconds, isAfter, isBefore, isToday} from "date-fns";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +23,16 @@ export class ProjectStorageService {
 
   saveProject(project: Project): void{
     let sortAfterSaving=true;
+
+  project.history.sort((a, b) => {
+      if(isBefore(a.from, b.from)){
+        return -1;
+      }
+      if(isAfter(a.from, b.from)){
+        return 1;
+      }
+      return 0;
+    });
 
     const index = this.projects.findIndex(p => {
       return p.name === project.name

@@ -71,6 +71,11 @@
     .count{
       font-weight: bold;
       font-size: 15px;
+      color: #000;
+      text-decoration: none;
+      &:hover{
+        text-decoration: underline;
+      }
     }
   }
   .controls{
@@ -94,6 +99,40 @@
       color: #ccc;
       transition: 0.18s;
       font-size: 14px;
+    }
+  }
+}
+
+.details {
+  background-color: #fff;
+  padding: 5px 5px 5px 20px;
+  border-left: 8px solid $blue;
+  border-bottom: 1px solid #ccc;
+  &>ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li{
+      margin-bottom: 5px;
+      .date{
+        font-weight: bold;
+      }
+      table {
+        border:0;
+        border-collapse: collapse;
+        margin-left: 10px;
+        tr{
+          &:hover{
+            .controls{
+              opacity: 100%;
+            }
+          }
+          .controls{
+            opacity: 0;
+            transition: 150ms;
+          }
+        }
+      }
     }
   }
 }

@@ -1,4 +1,5 @@
 import {History} from "./History";
+import {formatISO, isAfter, isBefore} from "date-fns";
 
 export class Project {
   public name: string;
@@ -21,5 +22,28 @@ export class Project {
     }else{
       return null;
     }
+  }
+
+  getHistoryByDay(): { [s in string]: History[] } {
+    const historiesByDay = {};
+    for(const h of this.history){
+      const key = formatISO(h.from, {representation:"date"});
+      if(!historiesByDay[key]){
+        historiesByDay[key] = [];
+      }
+      historiesByDay[key].push(h);
+    }
+    for(const hKey of Object.keys(historiesByDay)){
+      historiesByDay[hKey].sort((a, b) => {
+        if(isBefore(a.from,b.from)){
+          return -1;
+        }
+        if(isAfter(a.from,b.from)){
+          return 1;
+        }
+        return 0;
+      });
+    }
+    return historiesByDay;
   }
 }

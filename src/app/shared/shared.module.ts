@@ -17,7 +17,7 @@ import { GoalsComponent } from './components/goals/goals.component';
 @NgModule({
   declarations: [PageNotFoundComponent, WebviewDirective, ProjectListComponent, ProjectItemComponent, ProjectNewItemComponent, BeautifulSecondsPipe, GoalsComponent],
   imports: [CommonModule, TranslateModule, FormsModule, FontAwesomeModule],
-  exports: [TranslateModule, WebviewDirective, FormsModule, ProjectListComponent, BeautifulSecondsPipe, GoalsComponent],
+  exports: [TranslateModule, WebviewDirective, FormsModule, ProjectListComponent, BeautifulSecondsPipe, GoalsComponent, ProjectNewItemComponent],
   providers: [
     ProjectStorageService,
     GoalsService
