@@ -3,7 +3,7 @@ import {CalendarEvent} from "calendar-utils";
 import {ProjectStorageService} from "../shared/services/project-storage.service";
 import {BeautifulSecondsPipe} from "../shared/pipes/beautiful-seconds.pipe";
 import {CalendarView} from "angular-calendar";
-import {format} from "date-fns";
+import {differenceInSeconds, formatISO, parseISO} from "date-fns";
 
 @Component({
   selector: 'calendar',
@@ -20,26 +20,27 @@ export class CalendarComponent implements OnInit {
   constructor(private projectStorageService: ProjectStorageService, private beautifulSecondsPipe: BeautifulSecondsPipe) { }
 
   ngOnInit(): void {
+    this.createEventsFromProjects();
+  }
+
+  createEventsFromProjects(): void {
     const projects = this.projectStorageService.getProjects();
-    for(const project of projects){
-      console.log(project)
+    for (const project of projects) {
       const timePerDay = {};
-      for(const history of project.history){
-        const date = format(history.from, 'P');
-        const duration = Math.round((history.to.getTime() - history.from.getTime()) / 1000);
+      for (const history of project.history) {
+        const date = formatISO(history.from, { representation: 'date' });
+        const duration = differenceInSeconds(history.to, history.from);
         timePerDay[date] = typeof timePerDay[date] === 'number' ? timePerDay[date] + duration : duration;
       }
-      for(const date of Object.keys(timePerDay)){
+      for (const date of Object.keys(timePerDay)) {
         const event = {
           title: `${project.clientName} - ${project.name}`,
-          start: new Date(date),
+          start: parseISO(date+'T00:00:00Z'),
           project: project,
           totalDuration: this.beautifulSecondsPipe.transform(timePerDay[date])
         };
         this.events.push(event)
       }
     }
-
   }
-
 }
