@@ -7,7 +7,7 @@
   <div class="project-meta">
     <div class="projectName" (dblclick)="editName()">
       <ng-container *ngIf="editingName">
-        <input type="text" [(ngModel)]="project.name" placeholder="{{'PAGES.HOME.PROJECT' | translate}}" (focusout)="stopEditName()" (keypress)="keypressEditName($event)">
+        <input type="text" #editNameInput [(ngModel)]="project.name" placeholder="{{'PAGES.HOME.PROJECT' | translate}}" (focusout)="stopEditName()" (keypress)="keypressEditName($event)">
       </ng-container>
       <ng-container *ngIf="!editingName">
         {{ this.project.name }}
@@ -15,7 +15,7 @@
     </div>
     <div class="clientName" (dblclick)="editClientName()">
       <ng-container *ngIf="editingClientName">
-        <input type="text" [(ngModel)]="project.clientName" placeholder="{{'PAGES.HOME.CUSTOMER' | translate}}" (focusout)="stopEditClientName()" (keypress)="keypressEditClientName($event)">
+        <input type="text" #editClientNameInput [(ngModel)]="project.clientName" placeholder="{{'PAGES.HOME.CUSTOMER' | translate}}" (focusout)="stopEditClientName()" (keypress)="keypressEditClientName($event)">
       </ng-container>
       <ng-container *ngIf="!editingClientName">
         {{ this.project.clientName }}
@@ -26,7 +26,7 @@
 
 
   <div class="counter">
-    <span class="count">{{ this.project.timeSpentToday | beautifulSeconds }}</span>
+    <a href="#" (click)="toggleDetails()" class="count">{{ this.project.timeSpentToday | beautifulSeconds }}</a>
   </div>
 
 
@@ -34,4 +34,44 @@
     <a href="#" (click)="startCounting()" *ngIf="!isActive()" title="{{ 'PAGES.HOME.LIST-ITEM.START' | translate }}"><fa-icon [icon]="faPlay"></fa-icon></a>
     <a href="#" (click)="stopCounting()" *ngIf="isActive()" title="{{ 'PAGES.HOME.LIST-ITEM.STOP' | translate }}"><fa-icon [icon]="faStop"></fa-icon></a>
   </div>
+</div>
+
+<div class="details" *ngIf="detailsDisplayed">
+  <ng-container *ngIf="objectKeys(project.getHistoryByDay()).length > 0">
+    <ul>
+      <ng-container *ngFor="let day of objectKeys(project.getHistoryByDay())">
+        <li>
+          <span class="date">{{ day | date: 'shortDate' }}</span>
+          <table>
+            <tbody>
+              <tr *ngFor="let h of project.getHistoryByDay()[day]">
+                <ng-container *ngIf="editingHistory === h">
+                  <td><input type="datetime-local" step=1 [ngModel]="h.from  | date:'yyyy-MM-ddTHH:mm:ss'" (ngModelChange)="editHistoryFrom($event)"></td>
+                  <td>-</td>
+                  <td><input type="datetime-local" step=1 [ngModel]="h.to | date:'yyyy-MM-ddTHH:mm:ss'" (ngModelChange)="editHistoryTo($event)"></td>
+                  <td>
+                    <a href="#" (click)="updateHistory()"><fa-icon [icon]="faCheck"></fa-icon></a>
+                    <a href="#" (click)="cancelEditingHistory(h)"><fa-icon [icon]="faTimes"></fa-icon></a>
+                  </td>
+                </ng-container>
+                <ng-container *ngIf="editingHistory !== h">
+                  <td>{{ h.from | date: 'mediumTime' }}</td>
+                  <td>-</td>
+                  <td>{{ h.to | date: 'mediumTime'}}</td>
+                  <td class="controls" >
+                    <a href="#" (click)="deleteHistory(h)"><fa-icon [icon]="faTrash"></fa-icon></a>
+                    <a href="#" (click)="editHistory(h)"><fa-icon [icon]="faEdit"></fa-icon></a>
+                  </td>
+                </ng-container>
+              </tr>
+            </tbody>
+          </table>
+        </li>
+      </ng-container>
+    </ul>
+  </ng-container>
+  <ng-container *ngIf="objectKeys(project.getHistoryByDay()).length === 0">
+    <i>{{ 'PAGES.HOME.LIST-ITEM.NO_HISTORY_YET' | translate }}</i>
+  </ng-container>
+
 </div>

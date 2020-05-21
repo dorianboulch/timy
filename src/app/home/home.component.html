@@ -1,16 +1,19 @@
-<div id="header">
-  <div class="title">
-    <h1>{{ 'PAGES.HOME.TITLE' | translate }}</h1>
+<div id="home">
+  <div id="header">
+    <div class="title">
+      <h1>{{ 'PAGES.HOME.TITLE' | translate }}</h1>
+    </div>
+    <nav>
+      <a href="#" (click)="openCalendar()"><fa-icon [icon]="faCalendarAlt"></fa-icon></a>
+      <a routerLink=""><fa-icon [icon]="faCog"></fa-icon></a>
+    </nav>
+    <div class="timer" (click)="toggleDisplayGoals()">
+      <span title="{{ 'PAGES.HOME.TODAY_TIMER' | translate }}" class="count">{{ totalTimeTodayCounter | beautifulSeconds }}</span>
+    </div>
   </div>
-  <nav>
-    <a href="#" (click)="openCalendar()"><fa-icon [icon]="faCalendarAlt"></fa-icon></a>
-    <a routerLink=""><fa-icon [icon]="faCog"></fa-icon></a>
-  </nav>
-  <div class="timer" (click)="toggleDisplayGoals()">
-    <span title="{{ 'PAGES.HOME.TODAY_TIMER' | translate }}" class="count">{{ totalTimeTodayCounter | beautifulSeconds }}</span>
-  </div>
+
+  <goals *ngIf="displayGoals"></goals>
+
+  <app-project-list></app-project-list>
+  <app-project-new-item></app-project-new-item>
 </div>
-
-<goals *ngIf="displayGoals"></goals>
-
-<app-project-list></app-project-list>

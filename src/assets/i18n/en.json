@@ -8,7 +8,8 @@
           "LIST-ITEM": {
               "REMOVE": "Remove",
               "START": "Start",
-              "STOP": "Stop"
+              "STOP": "Stop",
+              "NO_HISTORY_YET": "No history have been found for this task."
           },
           "GOAL": {
             "DAILY_GOAL": "Daily Goal",
