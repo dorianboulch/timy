@@ -4,6 +4,7 @@ import {ProjectStorageService} from "./project-storage.service";
 import {History} from "../entities/History";
 import {BehaviorSubject} from "rxjs";
 import {differenceInSeconds, endOfDay, isThisWeek, isToday} from "date-fns";
+import {ElectronService} from "../../core/services";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,9 @@ export class ProjectTimeManagerService {
   public totalTimeThisWeek: BehaviorSubject<number>;
   public counting: BehaviorSubject<boolean>;
 
-  constructor(private projectStorageService: ProjectStorageService) {
+  private systemIsIdle: boolean = false;
+
+  constructor(private projectStorageService: ProjectStorageService, private electronService: ElectronService) {
 
     this.totalTimeTodayCounter = this.getTotalTimeTodayFromProjects();
     this.totalTimeThisWeekCounter = this.getTotalTimeThisWeekFromProjects();
@@ -29,6 +32,12 @@ export class ProjectTimeManagerService {
     this.counting = new BehaviorSubject<boolean>(false);
 
     setInterval(() => {this.tick()}, 1000);
+
+    const powerMonitor = electronService.remote.powerMonitor;
+    powerMonitor.on('lock-screen', () => { this.systemIsIdle = true });
+    powerMonitor.on('suspend', () => { this.systemIsIdle = true });
+    powerMonitor.on('unlock-screen', () => { this.systemIsIdle = false });
+    powerMonitor.on('resume', () => { this.systemIsIdle = false });
   }
 
   public getTotalTimeTodayFromProjects(): number {
@@ -74,7 +83,7 @@ export class ProjectTimeManagerService {
   }
 
   private tick(): void {
-    if (this.activeProject != null) {
+    if (this.activeProject != null && !this.systemIsIdle) {
       const lastHistory = this.activeProject.getLastHistory();
       const now = new Date();
       if(isToday(lastHistory.from)){
