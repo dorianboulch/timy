@@ -1,0 +1,21 @@
+{
+  "PAGES": {
+      "HOME": {
+          "TITLE": "Timy",
+          "PROJECT": "Projet",
+          "CUSTOMER": "Client",
+          "TODAY_TIMER": "Temps total aujourd'hui",
+          "LIST-ITEM": {
+              "REMOVE": "Supprimer",
+              "START": "Démarrer",
+              "STOP": "Arrêter",
+              "NO_HISTORY_YET": "Aucun historique trouvé pour cette tâche."
+          },
+          "GOAL": {
+            "DAILY_GOAL": "Objectif quotidien",
+            "WEEKLY_GOAL": "Objectif hebdomadaire",
+            "NOT_ENABLED": "Non activé"
+          }
+      }
+  }
+}

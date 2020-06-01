@@ -14,6 +14,7 @@ export class AppComponent {
     private translate: TranslateService
   ) {
     translate.setDefaultLang('en');
+    translate.use(electronService.remote.app.getLocale());
     console.log('AppConfig', AppConfig);
 
     if (electronService.isElectron) {
