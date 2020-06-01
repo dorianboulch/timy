@@ -10,6 +10,11 @@
   &.active{
     color: #fff;
     background-color: $blue;
+    .counter {
+      .count{
+        color: #fff;
+      }
+    }
     .controls{
       background-color: $headerBackgroundColor;
       &:hover{
@@ -130,6 +135,10 @@
           .controls{
             opacity: 0;
             transition: 150ms;
+            padding: 0 10px;
+            a:first-child {
+              margin-right: 8px;
+            }
           }
         }
       }
