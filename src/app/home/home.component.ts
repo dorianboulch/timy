@@ -5,6 +5,7 @@ import {ElectronService} from "../core/services";
 import {BehaviorSubject} from "rxjs";
 import {GoalsService} from "../shared/services/goals.service";
 import BrowserWindow = Electron.BrowserWindow;
+import * as os from "os";
 
 @Component({
   selector: 'app-home',
@@ -64,12 +65,24 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   openCalendar(): void {
     const display = this.electronService.screen.getDisplayNearestPoint(this.electronService.screen.getCursorScreenPoint());
-    this.electronService.openNewWindow('calendar', {
-      height: display.bounds.height,
-      width: display.bounds.width - this.electronService.remote.getCurrentWindow().getBounds().width,
+    const calendarWindowWidth = display.bounds.width - this.electronService.remote.getCurrentWindow().getBounds().width;
+    const calendarWindowHeight = display.bounds.height;
+
+    const calendarWindow = this.electronService.openNewWindow('calendar', {
+      height: calendarWindowHeight,
+      width: calendarWindowWidth,
       x: display.bounds.x,
       y: display.bounds.y
     });
+
+    // fix windows window size
+    if(os.platform() === 'win32'){
+      calendarWindow.setBounds({
+        x: display.bounds.x - 8,
+        height: calendarWindowHeight+8,
+        width: calendarWindowWidth+24,
+      });
+    }
   }
 
 }

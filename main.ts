@@ -1,6 +1,7 @@
 import {app, BrowserWindow, protocol, screen} from 'electron';
 import * as path from 'path';
 import * as url from 'url';
+import * as os from 'os';
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
@@ -14,14 +15,15 @@ function createWindow(): BrowserWindow {
   });
   let workArea = mostOnTheRightScreen.workArea;
   const windowWidth = workArea.width / 4;
+  const windowHeight = workArea.height;
 
   win = new BrowserWindow({
     x: workArea.x + workArea.width - windowWidth,
     y: 0,
     width: windowWidth,
-    height: workArea.height,
+    height: windowHeight,
     minWidth: 300,
-    useContentSize: true,
+    minHeight: 300,
     hasShadow: false,
     title: "Timy",
     show: false,
@@ -31,8 +33,15 @@ function createWindow(): BrowserWindow {
     },
   });
 
+  // fix windows window size
+  if(os.platform() === 'win32'){
+    win.setBounds({
+      width: windowWidth+8,
+      height: windowHeight+8,
+    });
+  }
+
   if (serve) {
-    require('devtron').install();
     require('electron-reload')(__dirname, {
       electron: require(`${__dirname}/node_modules/electron`)
     });
